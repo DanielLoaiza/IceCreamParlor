@@ -58,6 +58,14 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
             orderListAdapter = OrderListAdapter(requireContext(), mutableListOf(),this@OrderListFragment)
             adapter = orderListAdapter
         }
+        button_purchase.text = String.format(getString(R.string.order_items_count), 0)
+        button_purchase.setOnClickListener {
+            proceedToReceipt()
+        }
+    }
+
+    private fun proceedToReceipt() {
+
     }
 
     override fun onDoubleTap(v: View?) {

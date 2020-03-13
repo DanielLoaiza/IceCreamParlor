@@ -28,4 +28,8 @@ class OrderActivity : AppCompatActivity() {
             .replace(R.id.container, OrderListFragment.newInstance())
             .commit()
     }
+
+    override fun onBackPressed() {
+        //NO-OP
+    }
 }
