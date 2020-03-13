@@ -27,6 +27,8 @@ class ReceiptFragment : Fragment() {
 
     private var orderListAdapter: OrderListAdapter? = null
 
+    private var orderChangeListener: OrderChangeListener? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -39,15 +41,23 @@ class ReceiptFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         (context as? OrderActivity)?.orderComponent?.inject(this)
+        orderChangeListener = context as? OrderChangeListener
         viewModel = ViewModelProvider(this, viewModelFactory).get(ReceiptViewModel::class.java)
         super.onAttach(context)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        orderChangeListener = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_finish.setOnClickListener {
-
+            viewModel.startNewOrder()
+            orderChangeListener?.startNewOrder()
         }
+        textView_total_price.text = String.format(getString(R.string.price_format), viewModel.getCurrentOrderTotal().toString())
     }
 
 

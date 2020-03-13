@@ -11,4 +11,6 @@ class ReceiptViewModel @Inject constructor(private val orderController: OrderCon
     fun getCurrentOrder() = orderController.currentOrder
 
     fun getCurrentOrderTotal() = orderController.getCurrentOrderTotal()
+
+    fun startNewOrder() = orderController.startNewOrder()
 }

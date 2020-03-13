@@ -42,4 +42,9 @@ class OrderController @Inject constructor() {
                 acc.add(price.multiply(quantity))
             }
     }
+
+    fun startNewOrder() {
+        currentCount = 0
+        _currentOrder.clear()
+    }
 }

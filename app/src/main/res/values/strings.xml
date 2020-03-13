@@ -3,5 +3,8 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="order_list_label">Welcome</string>
     <string name="order_items_count">order %1d item</string>
+    <string name="price_format">$%1s</string>
     <string name="start_new_order">start new order</string>
+    <string name="thanks">thank you!</string>
+    <string name="total">Total</string>
 </resources>

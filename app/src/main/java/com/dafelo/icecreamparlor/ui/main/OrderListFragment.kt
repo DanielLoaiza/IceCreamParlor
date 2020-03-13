@@ -30,6 +30,8 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
 
     private var orderListAdapter: OrderListAdapter? = null
 
+    private var orderChangeListener: OrderChangeListener? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -42,6 +44,7 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
 
     override fun onAttach(context: Context) {
         (context as? OrderActivity)?.orderComponent?.inject(this)
+        orderChangeListener = context as? OrderChangeListener
         viewModel = ViewModelProvider(this, viewModelFactory).get(OrderViewModel::class.java)
         super.onAttach(context)
         lifecycleScope.launch {
@@ -49,6 +52,11 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
                 orderListAdapter?.updateDataset(it)
             })
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        orderChangeListener = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,12 +68,8 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
         }
         button_purchase.text = String.format(getString(R.string.order_items_count), 0)
         button_purchase.setOnClickListener {
-            proceedToReceipt()
+           orderChangeListener?.proceedToCheckout()
         }
-    }
-
-    private fun proceedToReceipt() {
-
     }
 
     override fun onDoubleTap(v: View?) {

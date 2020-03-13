@@ -5,9 +5,11 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import com.dafelo.icecreamparlor.di.OrderComponent
+import com.dafelo.icecreamparlor.ui.main.OrderChangeListener
 import com.dafelo.icecreamparlor.ui.main.OrderListFragment
+import com.dafelo.icecreamparlor.ui.main.ReceiptFragment
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity(), OrderChangeListener {
 
     lateinit var orderComponent: OrderComponent
 
@@ -32,4 +34,18 @@ class OrderActivity : AppCompatActivity() {
     override fun onBackPressed() {
         //NO-OP
     }
+
+    override fun proceedToCheckout() {
+        supportActionBar?.hide()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, ReceiptFragment.newInstance())
+            .commit()
+    }
+
+    override fun startNewOrder() {
+        supportActionBar?.show()
+        displayProductCatalog()
+    }
+
+
 }
