@@ -63,14 +63,14 @@ class OrderListFragment : Fragment(), TouchDetectorListener {
     override fun onDoubleTap(v: View?) {
         v?.let {
             val totalItems = viewModel.addItemToOrder(v.tag as String)
-            button_purchase.text = totalItems.toString()
+            button_purchase.text = String.format(getString(R.string.order_items_count), totalItems)
         }
     }
 
     override fun onTripleTap(v: View?) {
         v?.let {
             val totalItems = viewModel.removeItemsFromOrder(v.tag as String)
-            button_purchase.text = totalItems.toString()
+            button_purchase.text = String.format(getString(R.string.order_items_count), totalItems)
         }
     }
 
