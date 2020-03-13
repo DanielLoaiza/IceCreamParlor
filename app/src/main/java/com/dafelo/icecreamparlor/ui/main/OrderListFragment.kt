@@ -13,13 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dafelo.icecreamparlor.OrderActivity
 import com.dafelo.icecreamparlor.R
+import com.dafelo.icecreamparlor.common.TouchDetectorListener
 import com.dafelo.icecreamparlor.products.OrderProduct
 import com.dafelo.icecreamparlor.splash.SplashViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OrderListFragment : Fragment() {
+class OrderListFragment : Fragment(), TouchDetectorListener {
 
     companion object {
         fun newInstance() = OrderListFragment()
@@ -32,8 +33,10 @@ class OrderListFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -52,8 +55,24 @@ class OrderListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView_items.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            orderListAdapter = OrderListAdapter(requireContext(), mutableListOf())
+            orderListAdapter = OrderListAdapter(requireContext(), mutableListOf(),this@OrderListFragment)
             adapter = orderListAdapter
         }
     }
+
+    override fun onDoubleTap(v: View?) {
+        v?.let {
+            val totalItems = viewModel.addItemToOrder(v.tag as String)
+            button_purchase.text = totalItems.toString()
+        }
+    }
+
+    override fun onTripleTap(v: View?) {
+        v?.let {
+            val totalItems = viewModel.removeItemsFromOrder(v.tag as String)
+            button_purchase.text = totalItems.toString()
+        }
+    }
+
+
 }

@@ -9,6 +9,7 @@
         android:id="@+id/linearLayout_background_item"
         android:layout_width="@dimen/item_background_width"
         android:layout_height="@dimen/item_background_height"
+        android:clickable="true"
         android:layout_marginTop="16dp"
         android:background="@drawable/circle"
         android:gravity="center"

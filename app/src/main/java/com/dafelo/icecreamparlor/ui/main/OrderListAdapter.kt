@@ -10,10 +10,12 @@ import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dafelo.icecreamparlor.R
+import com.dafelo.icecreamparlor.common.TabDetectorListener
+import com.dafelo.icecreamparlor.common.TouchDetectorListener
 import com.dafelo.icecreamparlor.products.Product
 
 
-class OrderListAdapter(context: Context, private val orderProducts: MutableList<Product>) :
+class OrderListAdapter(context: Context, private val orderProducts: MutableList<Product>, private val touchDetectorListener: TouchDetectorListener) :
     RecyclerView.Adapter<OrderListAdapter.OrderListViewHolder>() {
 
     val images = mapOf(
@@ -68,7 +70,8 @@ class OrderListAdapter(context: Context, private val orderProducts: MutableList<
                 DrawableCompat.setTint(wrappedDrawable, Color.parseColor(product.backgroundColor))
                 backgroundContainer?.setBackgroundDrawable(wrappedDrawable)
             }
-
+            backgroundContainer?.tag = product.name
+            backgroundContainer?.setOnTouchListener(TabDetectorListener(touchDetectorListener))
 
 
         }
