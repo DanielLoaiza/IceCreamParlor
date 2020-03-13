@@ -9,9 +9,8 @@ import javax.inject.Inject
 class OrderViewModel @Inject constructor(private val productRepository: ProductRepository) :
     ViewModel() {
 
-    suspend fun getProducts() {
+    suspend fun getProducts() =
         liveData(Dispatchers.IO) {
             emit(productRepository.getProducts())
         }
-    }
 }
