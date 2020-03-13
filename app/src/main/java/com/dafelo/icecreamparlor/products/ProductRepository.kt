@@ -12,10 +12,17 @@ class ProductRepository @Inject constructor(private val productsService: Product
         private set
 
     suspend fun getProducts(): List<Product> {
-        return coroutineScope {
-            val productsRequest = async { productsService.getProducts() }
-            return@coroutineScope productsRequest.await()
-
+        try {
+            return coroutineScope {
+                if(productsCache.isNotEmpty()) {
+                    return@coroutineScope productsCache
+                } else {
+                    val productsRequest = async { productsService.getProducts() }
+                    return@coroutineScope productsRequest.await()
+                }
+            }
+        } catch (e: Exception) {
+            return emptyList()
         }
     }
 }

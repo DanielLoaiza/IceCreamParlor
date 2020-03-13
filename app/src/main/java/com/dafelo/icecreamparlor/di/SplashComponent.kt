@@ -1,7 +1,8 @@
-package com.dafelo.icecreamparlor.di.qualifiers
+package com.dafelo.icecreamparlor.di
 
 import com.dafelo.icecreamparlor.SplashActivity
 import com.dafelo.icecreamparlor.di.modules.SplashViewModelModule
+import com.dafelo.icecreamparlor.di.qualifiers.ActivityScope
 import dagger.Subcomponent
 
 @Subcomponent(modules = [SplashViewModelModule::class])

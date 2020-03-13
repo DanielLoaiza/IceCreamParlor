@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.dafelo.icecreamparlor.di.qualifiers.SplashComponent
+import com.dafelo.icecreamparlor.di.SplashComponent
 import com.dafelo.icecreamparlor.splash.SplashViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun launchMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, OrderActivity::class.java)
         startActivity(intent)
         finish()
     }

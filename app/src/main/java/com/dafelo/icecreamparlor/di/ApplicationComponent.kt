@@ -4,7 +4,6 @@ import android.content.Context
 import com.dafelo.icecreamparlor.di.modules.NetworkModule
 import com.dafelo.icecreamparlor.di.modules.SubcomponentsModule
 import com.dafelo.icecreamparlor.di.qualifiers.ApplicationContext
-import com.dafelo.icecreamparlor.di.qualifiers.SplashComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -14,6 +13,8 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun splashComponent(): SplashComponent.Factory
+
+    fun ordersComponent(): OrderComponent.Factory
 
     @Component.Factory
     interface Factory {
